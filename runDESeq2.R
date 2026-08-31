@@ -1,6 +1,4 @@
 
-# Step 1: preparing count data ----------------
-
 # read in counts data
 counts_data <- read.csv('counts_data.csv')
 head(counts_data)
@@ -17,7 +15,7 @@ all(colnames(counts_data) %in% rownames(colData))
 # jumble rows in colData - recreate the error
 colData <- colData[sample(1:nrow(colData)),]
 
-
+# 
 # are they in the same order?
 all(colnames(counts_data) == rownames(colData))
 counts_data <- counts_data[, rownames(colData)]
@@ -28,4 +26,9 @@ counts_data <- counts_data[, rownames(colData)]
 dds <- DESeqDataSetFromMatrix(countData = counts_data,
                               colData = colData,
                               design = ~ dexamethasone)
+
+dds <- DESeq(dds)
+
+res <- results(dds)
+summary(res)
 
