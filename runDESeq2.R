@@ -1,13 +1,16 @@
 #install BiocManager
 if(!requireNamespace("BiocManager", quietly = TRUE)){
-	install.packages("BiocManager")
+	install.packages("BiocManager", repos = "https://r-project.org")
 }
-install.packages(stats)
+
 #Install DESeq2
 BiocManager::install("DESeq2")
+
+#Load Libraries
 library(DESeq2)
 library(tidyverse)
 library(stats)
+
 # read in counts data
 counts_data <- read.csv('counts_data.csv')
 head(counts_data)
